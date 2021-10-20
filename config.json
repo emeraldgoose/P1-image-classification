@@ -1,0 +1,52 @@
+{
+    "EfficientNet": {
+        "lr_rate": 0.002,
+        "batch_size": 32,
+        "cutmix": false,
+        "dir": "/opt/ml/input/data/train/new_imgs/",
+        "num_classes": 18,
+        "target": "label",
+        "epochs": 30,
+        "transform": "EfficientTransform"
+    },
+    "ResNetMask": {
+        "lr_rate": 0.01,
+        "batch_size": 32,
+        "cutmix": false,
+        "dir": "/opt/ml/input/data/train/images/",
+        "num_classes": 3,
+        "target": "mask_code",
+        "epochs": 30,
+        "transform": "ResNetTransform"
+    },
+    "ResNetGender": {
+        "lr_rate": 0.01,
+        "batch_size": 32,
+        "cutmix": false,
+        "dir": "/opt/ml/input/data/train/images/",
+        "num_classes": 2,
+        "target": "gender_code",
+        "epochs": 30,
+        "transform": "ResNetTransform"
+    },
+    "ResNetAge": {
+        "lr_rate": 0.01,
+        "batch_size": 32,
+        "cutmix": false,
+        "dir": "/opt/ml/input/data/train/images/",
+        "num_classes": 3,
+        "target": "age_code",
+        "epochs": 30,
+        "transform": "ResNetTransform"
+    },
+    "ViT": {
+        "lr_rate": 0.002,
+        "batch_size": 32,
+        "cutmix": true,
+        "dir": "/opt/ml/input/data/train/images/",
+        "num_classes": 18,
+        "target": "label",
+        "epochs": 30,
+        "transform": "ViTTransform"
+    }
+}
