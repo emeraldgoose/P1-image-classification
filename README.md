@@ -156,4 +156,5 @@ p = [
     ]
 ```
 
-
+## 회고
+- [https://emeraldgoose.github.io/contest/2021/09/03/image-classification/](https://emeraldgoose.github.io/contest/2021/09/03/image-classification/)
