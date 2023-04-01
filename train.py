@@ -115,6 +115,7 @@ def train_one_epoch(model, train_loader, criterion, optimizer, device, scaler, c
 
     if cutmix:
         return epoch_loss, None, None,
+
     return epoch_loss, epoch_acc, epoch_f1
 
 
@@ -207,29 +208,22 @@ def main(config, model_name, checkpoint=False):
             print(f'epoch : {epoch}, loss : {loss}, acc : {acc}, f1 : {f1}')
 
         # validation
-            with torch.no_grad():
-                
-                model.eval()
-                val_loss, val_f1 = validation(model, test_loader, criterion, device)
-                if val_f1 > best_f1:
-                    model_saved = model_name + "model_saved" + str(fold) + ".pt"
-                    torch.save(model.state_dict(), os.path.join(path,model_saved))
-                    best_f1 = val_f1
-            
-                print(f'val loss : {val_loss:.3f}, val f1 : {val_f1:.3f}')
+        with torch.no_grad():
+            model.eval()
+            val_loss, val_f1 = validation(model, test_loader, criterion, device)
+            if val_f1 > best_f1:
+                model_saved = model_name + "model_saved" + str(fold) + ".pt"
+                torch.save(model.state_dict(), os.path.join(path,model_saved))
+                best_f1 = val_f1
+            print(f'val loss : {val_loss:.3f}, val f1 : {val_f1:.3f}')
+
         del model, optimizer, test_loader, scaler
-
-
 
 if __name__ == '__main__':
     # argparser
     parser = argparse.ArgumentParser(description='PyTorch Template')
     parser.add_argument('--model', type=str, required=False)
-
     args = parser.parse_args()
-
     model_name = args.model
-    
     config = OmegaConf.load("/opt/ml/image-classification-level1-20/mask-classification/config.json")
-
     main(config, model_name)
